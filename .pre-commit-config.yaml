@@ -1,0 +1,9 @@
+repos:
+  - repo: git@github.com:psf/black.git
+    rev: "23.12.1"
+    hooks:
+      - id: black
+  - repo: git@github.com:pre-commit/mirrors-mypy.git
+    rev: "v1.8.0"
+    hooks:
+      - id: mypy
