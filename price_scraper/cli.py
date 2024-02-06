@@ -132,6 +132,7 @@ def scrape(event: PriceScraperSchema, **kwargs) -> BaseRetailer:
         brand=event.brand.lower(),
         timeout=event.timeout,
         proxy_kwargs=event.proxy_config,
+        **kwargs,
     )
     # scrape product data
     try:
