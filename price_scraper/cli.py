@@ -150,20 +150,22 @@ def store(scraper: BaseRetailer, event: PriceScraperSchema, **kwargs):
         scraper: The scraper class for the retailer that contains scraped products.
         event: input scraping schema provided by the user.
     """
-    storages = [
-        StorageType(storage.storage_type).load()(**storage.storage_options)
-        for storage in event.storage_config
-    ]
     # store product data
-    for storage in storages:
+    for storage_config in event.storage_config:
         try:
+            storage = StorageType(storage_config.storage_type).load()(
+                **storage_config.storage_options
+            )
             storage.save(
                 product_prices=scraper.product_prices,
                 product_metadata=scraper.product_metadata,
             )
-            logger.info("Finished storing data into %s.", storage)
+            logger.info("Finished storing data into %s.", storage.__class__.__name__)
+            storage.session.close()
         except Exception as err:
-            logger.exception("Error on storing data to %s", storage, exc_info=True)
+            logger.error(
+                "Error on storing data to %s: %s", storage.__class__.__name__, err, exc_info=True
+            )
 
 
 def main():

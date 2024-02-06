@@ -51,7 +51,7 @@ Scraping schema includes:
 - `url`: The URL of retailer to scrape.
 - `category`: Freeform string of the category of products being scraped. If the string is separated by `/`, it would store them as a string of strings in the storage to account for sub-categories.
 - `brand`: The products brand. Scraped page must belong to a single product page at the moment.
-- `storage-config`: The type of storage to save the scraped data to. Accepts plurals. Can store into one or more storage repositories in a single scraping command.
+- `storage-config`: The type of storage to save the scraped data to. Accepts plurals. Can store into one or more storage repositories in a single scraping command in this format `--storage-config <storage_1_config> <storage_2_config>`.
   - Must include enum value for `storage_type` key, which indicates the repository class that needs to be used. The enum must exist in the supported [Enums](./price_scraper/enums.py).
   - `storage_options` is a freeform keyword argument dictionary that provides necessary arguments to the repository class instantiation.
 - `proxy-config`: The proxy configuration for Selenium. It is optional, but recommended to configure for large scale scraping.
@@ -98,9 +98,8 @@ spec:
               "--category",
               "Electronics/Computers&Accessories/Computers&Tablets/Laptops",
               "--storage-config",
-              '{"storage_type": "POSTGRES"}',
-              "--storage-config",
               '{"storage_type": "S3", "storage_options": {"bucket_and_prefix": "s3://<BUCKET>/<PREFIX>", "region": "<REGION>"}}',
+              '{"storage_type": "POSTGRES"}',
               "--timeout",
               "30",
             ]
