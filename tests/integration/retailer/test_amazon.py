@@ -1,7 +1,16 @@
+import allure
+import pytest
+
 from price_scraper.cli import scrape, PriceScraperSchema
 
 
+@allure.epic("Amazon")
+@allure.parent_suite('Brand grid product page')
+@pytest.mark.amazon
+@pytest.mark.selenium
+@pytest.mark.brand_grid
 def test_amazon():
+    allure.dynamic.suite("Brand Grid")
     scraper = scrape(
         PriceScraperSchema(
             retailer="AMZ",

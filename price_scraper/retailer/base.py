@@ -202,7 +202,7 @@ class BaseRetailer(ABC):
                     rating=self.get_product_rating(element),
                     review_count=self.get_product_review_count(element),
                 )
-                logger.info(
+                logger.debug(
                     "Meta: %s -- Price: %s",
                     {k: v for k, v in vars(meta).items() if not k.startswith("_")},
                     {k: v for k, v in vars(price).items() if not k.startswith("_")},

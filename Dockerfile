@@ -23,7 +23,7 @@ RUN FIREFOX_SETUP=firefox-setup.tar.bz2 && \
 COPY . /app
 
 # Install the function's dependencies
-RUN pip install "/app[postgres,s3]"
+RUN pip install "/app[postgres,s3,test]"
 
 # Use a slim version of the base Python image to reduce the final image size
 FROM python:3.10-slim

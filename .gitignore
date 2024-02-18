@@ -1,3 +1,4 @@
+allure-results/*
 temp_files/*
 *log
 *html
